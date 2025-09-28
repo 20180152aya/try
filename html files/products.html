@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - ElectroHub</title>
+  <!-- tailwind link -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- bootstrap link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+  <div id="alertBox" class="z-[100] fixed left-[35%] top-5 w-[25%] text-center bg-orange-600 text-white px-3 py-3 rounded-lg shadow-lg
+              opacity-0 scale-90 transform transition-all duration-500 ease-out">
+    <p>⚠️ Sorry, You Should Login First</p>
+  </div>
+
+  <header class="header bg-black flex items-center " id="header">
+    <!-- div bottom_bar -->
+    <div id="bottom_bar"
+      class="bottom fixed w-full flex flex-row justify-around p-5 bottom-0 z-50  bg-white m-0 md:hidden ">
+      <div><a href="../index.html" class="hover:text-orange-600 transition-colors duration-500"><i
+            class="fa-solid fa-house text-3xl"></i></a></div>
+      <div><a href="" id="love" class="hover:text-orange-600 transition-colors duration-500"><i
+            class="fa-solid fa-heart text-3xl"></i></a></div>
+      <div><a href="./products.html" class="hover:text-orange-600 transition-colors duration-500"><i
+            class="fa-solid fa-store text-3xl"></i></a></div>
+      <div><a id="logout_mobile" href="" class="hover:text-orange-600 transition-colors duration-500"><i
+            class="fa-solid fa-right-from-bracket text-3xl text-red-600"></i></a></div>
+    </div>
+    <!--end div bottom_bar -->
+
+    <div class="container mx-auto p-10 text-stone-300 py-5">
+      <!-- Desktop navbar -->
+      <div class="row md:grid grid-cols-2 gap-4 hidden ">
+        <div class="title">
+          <h2 class="text-2xl ml-5 text-white"><i class="fa-solid fa-plug"></i> ElectroHub</h2>
+        </div>
+        <div class="list">
+          <ul class="flex flex-row justify-end text-sm gap-5">
+            <li class=""><a id="wishlist" href="#" class="text-slate-400 hover:text-white"><i
+                  class="fa-regular fa-heart pr-3"></i> My
+                Wishlist<span id="wishlistCount">0</span></a></li>
+            <li class=""><a href="./myorders.html" class="text-slate-400 hover:text-white"><i
+                  class="fa-regular fa-list pr-3"></i> My Orders</a></li>
+            <li class=""><a id="account" href="./login.html" class="text-slate-400 hover:text-white"><i
+                  class="fa-regular fa-user pr-3"></i>
+                Account</a></li>
+            <li id="account_content" class="hidden"><a id="logout" href="" class="text-red-600 hover:text-white"><i
+                  class="fa-solid fa-right-from-bracket text-red-600"></i>
+                Log Out</a></li>
+            <!-- Admin Link (hidden by default) -->
+            <li class=" hidden " id="adminLink"><a href="./isadminV2.html"
+                class="text-slate-400 hover:text-white flex items-center gap-2">
+                <i class="bi bi-shield-lock-fill"></i> Admin Panel
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="links text-lg">
+          <ul class="flex flex-row justify-around text-sm uppercase text-slate-400 md:ml-3">
+            <li><a href="../index.html" class="text-white">home</a></li>
+            <li><a href="./products.html" class="hover:text-white">shop</a></li>
+            <li><a href="./about.html" class="hover:text-white">about us</a></li>
+            <li><a href="./contact.html" class="hover:text-white">contact us</a></li>
+          </ul>
+        </div>
+        <div class="shop text-end">
+          <a href="./mycart.html"> <i class="fa-solid fa-bag-shopping"></i><span id="cartCount"
+              class="ml-1 bg-red-500 text-white text-xs rounded-full px-1">0</span></a>
+        </div>
+      </div>
+      <!-- end desktob navbar -->
+
+      <!-- Mobile Navbar -->
+      <div class="row grid grid-cols-2  md:hidden mt-3">
+        <div class="title">
+          <a href="../index.html" class="text-2xl"><i class="fa-solid fa-plug"></i> ElectroHub</a>
+        </div>
+        <div class="menu text-end">
+          <button class="text-xl hover:text-orange-700"> <a href="./mycart.html"><i
+                class="fa-solid fa-bag-shopping"></i><span id="cartCountMobile"
+                class="ml-1 bg-red-500 text-white text-xs rounded-full px-1">0</span></a></button>
+          <button>
+            <a id="account_mobile" href="./login.html" class="hover:text-orange-600 transition-colors duration-500">
+              <i class=" fa-solid fa-user text-xl"></i></a>
+          </button>
+          <button class="text-xl hover:text-orange-700" id="menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+      </div>
+      <!-- end mobile navbar -->
+
+      <!-- menu_drop -->
+      <div id="meanu_drop"
+        class="fixed top-0 right-0 h-screen w-[95%] z-50 py-10 px-10 bg-black text-white text-left overflow-y-auto transform translate-x-full transition-transform duration-500">
+        <div class="colse text-end mb-5">
+          <button id="close_menu"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="content">
+          <h2 class="text-2xl mb-5"><i class="fa-solid fa-plug"></i> ElectroHub</h2>
+          <ul class="mx-5 my-5">
+            <li class="py-3 text-2xl text-orange-600 font-bold"><a href="../index.html">Home</a></li>
+            <li class="py-3 text-2xl font-bold hover:text-orange-600"><a href="./products.html">Shop</a></li>
+            <li class="py-3 text-2xl font-bold hover:text-orange-600"><a href="./about.html">About Us</a></li>
+            <li class="py-3 text-2xl font-bold hover:text-orange-600"><a href="./contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- end menu_drop -->
+    </div>
+  </header>
+
+
+
+
+
+  <!-- Main Content -->
+  <div class="bg-gray-100 pt-6">
+
+  <!-- Search Bar -->
+  <div class="max-w-4xl mx-auto mb-4 flex flex-col sm:flex-row gap-2">
+    <div class="flex flex-1">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search products..."
+        class="w-full px-6 py-3 border rounded-l text-lg focus:outline-none focus:ring"
+      />
+      <button
+        id="search-btn"
+        class="px-6 py-3 bg-amber-600 text-white rounded-r hover:bg-amber-700 text-lg"
+      >
+        Search
+      </button>
+    </div>
+    <select id="category-filter" class="px-2 py-2 border rounded focus:outline-none">
+      <option value="">All Categories</option>
+    </select>
+    <input
+      type="number"
+      id="min-price"
+      placeholder="Min Price"
+      class="w-24 px-2 py-2 border rounded focus:outline-none"
+      oninput="this.value = Math.max(0,this.value)"
+    />
+    <input
+      type="number"
+      id="max-price"
+      placeholder="Max Price"
+      class="w-24 px-2 py-2 border rounded focus:outline-none"
+         oninput="this.value = Math.max(0,this.value)"
+    />
+    <button
+      id="filter-btn"
+      class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" >
+      Filter
+    </button>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div id="loading" class="fixed inset-0  items-center justify-center bg-gray-100 bg-opacity-75 z-50 hidden">
+    <i class="fas fa-spinner fa-spin text-4xl text-amber-600"></i>
+  </div>
+
+  <!-- Dynamic Cards Container -->
+  <div id="product-container" class="mt-2 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-1 gap-y-6 justify-items-center"></div>
+
+  <!-- Add this below your product container -->
+  <div id="pagination" class="flex justify-center items-center mt-6 gap-2"></div>
+
+
+
+    <footer class="bg-black text-gray-300 pt-12 pb-6">
+    <div class="container mx-auto px-6 lg:px-20">
+      <!-- Top Icons Row -->
+      <div class="grid md:grid-cols-3 gap-8 text-center md:text-left mb-10 border-b border-orange-600">
+        <div class="mb-8">
+          <h4 class="flex items-center justify-center md:justify-start text-white font-semibold mb-2">
+            <i class="bi bi-laptop mr-2"></i>
+            Cutting-Edge Tech
+          </h4>
+          <p class="text-sm text-gray-400">
+            Latest gadgets and electronics with premium quality.
+          </p>
+        </div>
+        <div class="mb-8">
+          <h4 class="flex items-center justify-center md:justify-start text-white font-semibold mb-2">
+            <i class="bi bi-truck mr-2"></i>
+            Fast Delivery
+          </h4>
+          <p class="text-sm text-gray-400">
+            Quick and reliable shipping to your doorstep.
+          </p>
+        </div>
+        <div class="mb-8">
+          <h4 class="flex items-center justify-center md:justify-start text-white font-semibold mb-2">
+            <i class="bi bi-shield-check mr-2"></i>
+            Best Warranty
+          </h4>
+          <p class="text-sm text-gray-400">
+            Extended warranty and hassle-free returns.
+          </p>
+        </div>
+      </div>
+
+      <!-- Links Section -->
+      <div class="grid md:grid-cols-4 gap-8 mb-12">
+        <!-- Shop -->
+        <div>
+          <h5 class="text-white font-semibold mb-4">Shop</h5>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="#" class="hover:text-orange-600"><i class="bi bi-phone mr-2"></i>Smartphones</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-orange-600"><i class="bi bi-laptop mr-2"></i>Laptops</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-orange-600"><i class="bi bi-headphones mr-2"></i>Headphones</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-orange-600"><i class="bi bi-controller mr-2"></i>Gaming Consoles</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-orange-600"><i class="bi bi-usb-symbol mr-2"></i>Accessories</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Useful Links -->
+        <div>
+          <h5 class="text-white font-semibold mb-4">Useful Links</h5>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="#" class="hover:text-orange-600">Terms & Policy</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-orange-600">Refund Policy</a>
+            </li>
+            <li><a href="#" class="hover:text-orange-600">About Us</a></li>
+            <li>
+              <a href="#" class="hover:text-orange-600">Delivery Info</a>
+            </li>
+            <li><a href="#" class="hover:text-orange-600">Help Center</a></li>
+          </ul>
+        </div>
+
+        <!-- Find Us -->
+        <div>
+          <h5 class="text-white font-semibold mb-4">Find Us</h5>
+          <p class="text-sm">123 Tech Street<br />Silicon Valley, CA 94043</p>
+          <p class="text-sm mt-2">(123) 456-7890<br />support@estore.com</p>
+        </div>
+
+        <!-- Work Hours -->
+        <div>
+          <h5 class="text-white font-semibold mb-4">Work Hours</h5>
+          <p class="text-sm">
+            Mon-Fri 09:00AM - 09:00PM<br />Sat-Sun 10:00AM - 06:00PM
+          </p>
+          <div class="flex space-x-4 mt-2 text-lg w-full">
+            <a href="#" class="text-gray-400 hover:text-orange-600"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-orange-600"><i class="bi bi-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom -->
+      <div class="border-t border-orange-600 pt-6 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-sm text-gray-400">
+          &copy; 2025 - Electronics Store. All rights reserved.
+        </p>
+        <div class="flex space-x-4 mt-4 md:mt-0">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" class="h-6" alt="Visa" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/PayPal_logo.svg" class="h-6" alt="PayPal" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Icons -->
+  </footer>
+
+
+<script type="module" src="../scripts file/firebase_connection.js"></script>
+  <script src="../scripts file/header.js" type="module" ></script>
+  <script src="../scripts file/products.js" type="module"></script>
+  <script type="module" src="../scripts file/mycart.js"></script>
+</body>
+</html>

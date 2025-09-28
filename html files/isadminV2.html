@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ElectroHub – Admin Panel</title>
+
+    <!-- Tailwind + Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-papX..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script
+      src="https://kit.fontawesome.com/a2e0e6ad65.js"
+      crossorigin="anonymous"
+    ></script>
+
+   
+  
+  </head>
+
+  <body class="bg-gray-100 text-gray-900 font-sans">
+    <!-- Header -->
+    <header
+      class="bg-black text-white flex items-center justify-between px-6 py-4 shadow-md fixed top-0 w-full z-40"
+    >
+      <div class="flex items-center gap-2 font-bold text-2xl">
+        <i class="fa-solid fa-plug text-orange-500"></i>
+        <span>ElectroHub</span>
+      </div>
+
+      <!-- menu toggle (works on all screens) -->
+      <button
+        id="menuToggle"
+        class="text-2xl md:hidden hover:text-orange-400 transition"
+      >
+        <i class="bi bi-list"></i>
+      </button>
+    </header>
+
+    <!-- Overlay (for mobile when sidebar open) -->
+    <div
+      id="overlay"
+      class="fixed inset-0 bg-black bg-opacity-40 hidden z-40"
+    ></div>
+
+    <div class="flex">
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="w-auto min-h-screen bg-black text-white p-6 fixed top-0 left-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-50"
+      >
+        <!-- header inside sidebar -->
+        <div class="flex items-center justify-between mb-6">
+          <h1 class="text-xl font-bold text-orange-500 flex items-center gap-2">
+            <i class="bi bi-shield-lock-fill"></i> Admin Panel
+          </h1>
+          <button id="closeSidebar" class="text-2xl md:hidden">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+
+        <nav class="space-y-4 font-medium">
+          <a
+            id="navDashboard"
+            href="#dashboard"
+            class="block hover:text-orange-400 flex items-center gap-2"
+            ><i class="bi bi-speedometer2"></i> Dashboard</a
+          >
+
+          <!-- keep the element id so JS can toggle the form visibility -->
+          <a
+            id="addProductBtn"
+            href="#addProduct"
+            class="block hover:text-orange-400 flex items-center gap-2"
+            ><i class="bi bi-plus-circle"></i> Add Product</a
+          >
+
+          <a
+            id="navProducts"
+            href="#products"
+            class="block hover:text-orange-400 flex items-center gap-2"
+            ><i class="bi bi-box-seam"></i> Products</a
+          >
+          <a
+            id="navOrders"
+            href="#orders"
+            class="block hover:text-orange-400 flex items-center gap-2"
+            ><i class="bi bi-cart-check"></i> Orders</a
+          >
+          <a
+            id="navUsers"
+            href="#users"
+            class="block hover:text-orange-400 flex items-center gap-2"
+            ><i class="bi bi-people"></i> Users</a
+          >
+
+          <a
+            href="../index.html"
+            class="block text-red-400 hover:text-orange-400 mt-10 flex items-center gap-2"
+          >
+            <i class="bi bi-box-arrow-left"></i> Back to Site
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Main content -->
+      <main
+        id="mainContent"
+        class="flex-1 md:ml-64 p-10 space-y-16 bg-gray-50 min-h-screen pt-20"
+      >
+        <!-- Dashboard -->
+        <section id="dashboard">
+          <h2 class="text-3xl font-semibold text-gray-800 mb-6">Overview</h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-2xl shadow">
+              <h3 class="text-xl font-bold text-orange-500">Products</h3>
+              <p id="productsStat" class="text-gray-600 mt-2">Loading...</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow">
+              <h3 class="text-xl font-bold text-orange-500">Orders</h3>
+              <p id="ordersStat" class="text-gray-600 mt-2">Loading...</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow">
+              <h3 class="text-xl font-bold text-orange-500">Users</h3>
+              <p id="usersStat" class="text-gray-600 mt-2">Loading...</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow">
+              <h3 class="text-xl font-bold text-orange-500">Revenue</h3>
+              <p id="revenueStat" class="text-gray-600 mt-2">Loading...</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Add Product (hidden by default) -->
+        <section id="addProduct" class="hidden">
+          <h2 id="formTitle" class="text-2xl font-semibold text-gray-800 mb-6">
+            Add New Product
+          </h2>
+          <form
+            id="productForm"
+            class="bg-white p-6 rounded-2xl shadow space-y-4"
+          >
+            <input
+              type="text"
+              id="productName"
+              placeholder="Product Name"
+              class="w-full p-3 border rounded"
+              required
+            />
+            <input
+              type="text"
+              id="productCategory"
+              placeholder="Category"
+              class="w-full p-3 border rounded"
+            />
+            <div class="grid grid-cols-2 gap-4">
+              <input
+                type="number"
+                step="0.01"
+                id="productPrice"
+                placeholder="Price"
+                class="w-full p-3 border rounded"
+                required
+              />
+              <input
+                type="number"
+                id="productQuantity"
+                placeholder="Quantity"
+                class="w-full p-3 border rounded"
+                required
+              />
+            </div>
+            <textarea
+              id="productDescription"
+              placeholder="Description"
+              class="w-full p-3 border rounded"
+            ></textarea>
+            <input type="file" id="productImage" class="w-full p-3" />
+            <p id="uploadStatus" class="text-sm text-gray-500"></p>
+            <div class="flex gap-4">
+              <button
+                id="submitBtn"
+                type="submit"
+                class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"
+              >
+                Add Product
+              </button>
+              <button
+                id="cancelAdd"
+                type="button"
+                class="px-4 py-2 rounded border"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Products -->
+        <section id="products">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-semibold text-gray-800">
+              Manage Products
+            </h2>
+        </div>
+        <div
+        id="productsContainer"
+        class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        ></div>
+        <button
+          id="loadMoreBtn"
+          class="hidden mt-2 block mx-auto bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"
+        >
+          Load More
+        </button>
+        </section>
+
+        <!-- Orders -->
+        <section id="orders">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-semibold text-gray-800">Orders</h2>
+            <div class=" flex gap-4">
+              <select id="orderFilter" class="border rounded p-2">
+                <option value="all">All Orders</option>
+                <option value="pending">Pending</option>
+                <option value="shipped">Shipped</option>
+                <option value="canceled">Canceled</option>
+              </select>
+              <button id="applyFilter" class="bg-orange-500 text-white px-3 py-1 rounded">Apply</button>
+            </div>
+           
+          </div>
+          <div id="ordersContainer" class="space-y-4"></div>
+           <button
+              id="reloadOrdersBtn"
+              class="mt-2 block mx-auto bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"
+            >
+              Reload Orders
+            </button>
+        </section>
+
+       <!-- Users Section -->   
+    <section id="users">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">Users</h2>
+        <div id="usersContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- JS will render users here -->
+        </div>
+    </section>
+
+    <!-- admin.js (module) -->
+         <!-- small inline fallback for sidebar toggle in case admin.js didn't load -->
+     <script type="module" src="../scripts file/firebase_connection.js"></script>
+    <script type="module" src="../scripts file/adminV2.js"></script>
+    <!-- <script type="module" src="../scripts/updateProdacts.js"></script> -->
+
+
+    <script>
+      (function () {
+        const sidebar = document.getElementById("sidebar");
+        const menuToggle = document.getElementById("menuToggle");
+        const closeSidebar = document.getElementById("closeSidebar");
+        const overlay = document.getElementById("overlay");
+
+        if (!menuToggle) return;
+        menuToggle.addEventListener("click", () => {
+          sidebar.classList.toggle("-translate-x-full");
+          if (overlay) overlay.classList.toggle("hidden");
+        });
+        if (closeSidebar) {
+          closeSidebar.addEventListener("click", () => {
+            sidebar.classList.add("-translate-x-full");
+            if (overlay) overlay.classList.add("hidden");
+          });
+        }
+        if (overlay)
+          overlay.addEventListener("click", () => {
+            sidebar.classList.add("-translate-x-full");
+            overlay.classList.add("hidden");
+          });
+      })();
+    </script>
+
+
+  </body>
+</html>

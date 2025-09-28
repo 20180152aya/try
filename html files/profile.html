@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- bootstrap link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="bg-black ">
+  <div id="alertBox" class="z-[100] fixed left-[35%] top-5 w-[25%] text-center bg-orange-600 text-white px-3 py-3 rounded-lg shadow-lg
+              opacity-0 scale-90 transform transition-all duration-500 ease-out">
+  </div>
+<div id="emailVerified" 
+     class="z-[100] fixed flex items-center left-1/2 -translate-x-1/2 top-5 bg-orange-600 text-white px-5 py-3 rounded-lg shadow-lg
+            opacity-0 scale-90 transform transition-all duration-500 ease-out gap-5 relative">
+
+  <button id="closeEmailVerified" 
+          class="absolute top-2  right-2 text-white hover:text-gray-200 text-xl font-bold">
+    &times;
+  </button>
+
+  <div class="pl-5 pr-5 border-l-4 border-white">
+    <p>You Should Verify Your Email</p>
+  </div>
+
+  <div>
+    <button type="button"  id="Resend"
+            class="bg-white text-orange-600 font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-orange-100 transition">
+      Resend Email Verification
+    </button>
+  </div>
+</div>
+
+
+<!-- Password Modal -->
+<div id="passwordModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+  <div class="bg-white rounded-2xl shadow-xl p-6 w-96 relative">
+    <h2 class="text-xl font-bold mb-4 text-black">🔒 Confirm Password</h2>
+
+    <input id="modalPassword" type="password" placeholder="Enter your password"
+      class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-4 text-black"/>
+
+    <div class="flex justify-end space-x-3">
+      <button id="cancelPasswordBtn"
+        class="px-4 py-2 rounded-lg bg-gray-200 text-black hover:bg-gray-300 transition">Cancel</button>
+      <button id="confirmPasswordBtn"
+        class="px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 transition">Confirm</button>
+    </div>
+  </div>
+</div>
+
+
+
+  <header class="header bg-black flex items-center " id="header">
+    <!-- div bottom_bar -->
+    <div id="bottom_bar"
+      class="bottom fixed w-full flex flex-row justify-around p-5 bottom-0 z-50  bg-white m-0 md:hidden ">
+      <div><a href="../index.html" class="hover:text-orange-600 transition-colors duration-500"><i
+            class="fa-solid fa-house text-3xl"></i></a></div>
+      <div><a href="" id="love" class="hover:text-orange-600 transition-colors duration-500"><i
+            class="fa-solid fa-heart text-3xl"></i></a></div>
+      <div><a href="./products.html" class="hover:text-orange-600 transition-colors duration-500"><i
+            class="fa-solid fa-store text-3xl"></i></a></div>
+      <div><a id="logout_mobile" href="" class="hover:text-orange-600 transition-colors duration-500"><i
+            class="fa-solid fa-right-from-bracket text-3xl text-red-600"></i></a></div>
+    </div>
+    <!--end div bottom_bar -->
+
+    <div class="container mx-auto p-10 text-stone-300 py-5">
+      <!-- Desktop navbar -->
+      <div class="row md:grid grid-cols-2 gap-4 hidden ">
+        <div class="title">
+          <h2 class="text-2xl ml-5 text-white"><i class="fa-solid fa-plug"></i> ElectroHub</h2>
+        </div>
+        <div class="list">
+          <ul class="flex flex-row justify-end text-sm gap-5">
+            <li class=""><a id="wishlist" href="#" class="text-slate-400 hover:text-white"><i
+                  class="fa-regular fa-heart pr-3"></i> My
+                Wishlist<span id="wishlistCount">0</span></a></li>
+            <li class=""><a href="./myorders.html" class="text-slate-400 hover:text-white"><i
+                  class="fa-regular fa-list pr-3"></i> My Orders</a></li>
+            <li class=""><a id="account" href="./login.html" class="text-slate-400 hover:text-white"><i
+                  class="fa-regular fa-user pr-3"></i>
+                Account</a></li>
+            <li id="account_content" class="hidden"><a id="logout" href="" class="text-red-600 hover:text-white"><i
+                  class="fa-solid fa-right-from-bracket text-red-600"></i>
+                Log Out</a></li>
+            <!-- Admin Link (hidden by default) -->
+            <li class=" hidden " id="adminLink"><a href="./isadminV2.html"
+                class="text-slate-400 hover:text-white flex items-center gap-2">
+                <i class="bi bi-shield-lock-fill"></i> Admin Panel
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="links text-lg">
+          <ul class="flex flex-row justify-around text-sm uppercase text-slate-400 md:ml-3">
+            <li><a href="../index.html" class="text-white">home</a></li>
+            <li><a href="./products.html" class="hover:text-white">shop</a></li>
+            <li><a href="./about.html" class="hover:text-white">about us</a></li>
+            <li><a href="./contact.html" class="hover:text-white">contact us</a></li>
+          </ul>
+        </div>
+        <div class="shop text-end">
+          <a href="./mycart.html"> <i class="fa-solid fa-bag-shopping"></i><span id="cartCount"
+              class="ml-1 bg-red-500 text-white text-xs rounded-full px-1">0</span></a>
+        </div>
+      </div>
+      <!-- end desktob navbar -->
+
+      <!-- Mobile Navbar -->
+      <div class="row grid grid-cols-2  md:hidden mt-3">
+        <div class="title">
+          <a href="../index.html" class="text-2xl"><i class="fa-solid fa-plug"></i> ElectroHub</a>
+        </div>
+        <div class="menu text-end">
+          <button class="text-xl hover:text-orange-700"> <a href="./mycart.html"><i
+                class="fa-solid fa-bag-shopping"></i><span id="cartCountMobile"
+                class="ml-1 bg-red-500 text-white text-xs rounded-full px-1">0</span></a></button>
+          <button>
+            <a id="account_mobile" href="./login.html" class="hover:text-orange-600 transition-colors duration-500">
+              <i class=" fa-solid fa-user text-xl"></i></a>
+          </button>
+          <button class="text-xl hover:text-orange-700" id="menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+      </div>
+      <!-- end mobile navbar -->
+
+      <!-- menu_drop -->
+      <div id="meanu_drop"
+        class="fixed top-0 right-0 h-screen w-[95%] z-50 py-10 px-10 bg-black text-white text-left overflow-y-auto transform translate-x-full transition-transform duration-500">
+        <div class="colse text-end mb-5">
+          <button id="close_menu"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="content">
+          <h2 class="text-2xl mb-5"><i class="fa-solid fa-plug"></i> ElectroHub</h2>
+          <ul class="mx-5 my-5">
+            <li class="py-3 text-2xl text-orange-600 font-bold"><a href="../index.html">Home</a></li>
+            <li class="py-3 text-2xl font-bold hover:text-orange-600"><a href="./products.html">Shop</a></li>
+            <li class="py-3 text-2xl font-bold hover:text-orange-600"><a href="./about.html">About Us</a></li>
+            <li class="py-3 text-2xl font-bold hover:text-orange-600"><a href="./contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- end menu_drop -->
+    </div>
+  </header>
+
+
+
+
+
+  <h1 class="text-orange-600 py-10 px-10 text-center text-5xl">My Profile</h1>
+  <div class="profile bg-black flex justify-center p-6">
+    <div class="w-full max-w-4xl">
+
+      <div class="bg-white rounded-2xl shadow-xl relative p-6 text-center">
+        <!-- Profile Image -->
+        <div class="absolute -top-16 left-1/2 transform -translate-x-1/2">
+          <img src="../images/profile.webp" alt="Profile" id="profileImage"
+            class="w-32 h-32 rounded-full border-4 border-white shadow-lg">
+        </div>
+
+        <!-- Info -->
+        <div class="mt-20">
+          <h2 id="profileName" class="text-3xl font-bold text-black capitalize">Aya Hamed</h2>
+          <p id="profileEmail" class="text-gray-600">aya@example.com</p>
+          <p class="mt-2 text-gray-500" id="profilePhone"></p>
+
+          <!-- Edit Button -->
+          <button id="editBtn"
+            class="mt-4 px-5 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition">
+            Edit Profile
+          </button>
+        </div>
+
+        <!-- Edit Form (Hidden by default) -->
+        <div id="editForm" class="hidden mt-6 text-left">
+          <form class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-black">Name</label>
+              <input type="text" class="w-full border rounded-lg p-2 focus:border-orange-500" id="editName">
+              <div class="error" id="nameError"></div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-black">UserName</label>
+              <input type="text" class="w-full border rounded-lg p-2 focus:border-orange-500" id="editUsername">
+              <div class="error" id="usernameError"></div>
+              <div>
+
+              </div>
+              <label class="block text-sm font-medium text-black">Email</label>
+              <input type="email" class="w-full border rounded-lg p-2 focus:border-orange-500" id="editEmail">
+              <div class="error" id="emailError"></div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-black">Address</label>
+              <input type="text" class="w-full border rounded-lg p-2 focus:border-orange-500" id="editAddress">
+              <div class="error" id="addressError"></div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-black">City</label>
+              <input type="text" class="w-full border rounded-lg p-2 focus:border-orange-500" id="editCity">
+              <div class="error" id="cityError"></div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-black">Phone</label>
+              <input type="text" class="w-full border rounded-lg p-2 focus:border-orange-500" id="editPhone">
+              <div class="error" id="phoneError"></div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-black">Zip</label>
+              <input type="text" class="w-full border rounded-lg p-2 focus:border-orange-500" id="editZip">
+              <div class="error" id="zipError"></div>
+              <div>
+                <label class="block text-sm font-medium text-black"> Photo</label>
+                <input type="file" id="uploadPhoto" class="w-full border rounded-lg p-2 focus:border-orange-500">
+              </div>
+              <button type="submit"
+                class="w-full bg-orange-500 text-white py-3 my-3 rounded-lg hover:bg-orange-600 transition">
+                Save
+              </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Favorite Products -->
+
+      <section class="favorites-section m-7">
+        <h2 class="text-3xl mb-4"> <i class="fa-solid fa-heart text-red-600 "></i> My Favorite Products</h2>
+        <div id="favoritesContainer" 
+     class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full items-stretch ">
+</div>
+      </section>
+
+      <script type="module" src="../scripts file/firebase_connection.js"></script>
+      <script type="module" src="../scripts file/header.js"></script>
+      <script type="module" src="../scripts file/profile2.js"></script>
+
+</body>
+
+</html>

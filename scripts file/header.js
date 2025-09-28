@@ -139,9 +139,9 @@ window.addEventListener("DOMContentLoaded",async () => {
     if (wishlistCount) wishlistCount.textContent = gust.length;
     if (accountLink) {
       accountLink.textContent = "Account";
-      accountLink.href = "../html files/login.html";
+      accountLink.href = "/e-commerce-1000/public/html files/login.html";
     }
-    if (account_mobile) account_mobile.href = "../html files/login.html";
+    if (account_mobile) account_mobile.href = "/e-commerce-1000/public/html files/login.html";
     if (account_content) account_content.classList.add("hidden");
     await updateCartCount();
   }

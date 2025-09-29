@@ -126,12 +126,12 @@ window.addEventListener("DOMContentLoaded",async () => {
     const name = userData.Username || userData.Email || "Account";
     if (accountLink) {
       accountLink.textContent = `Hello, ${name}`;
-      accountLink.href = "/e-commerce-1000/public/html files/profile.html";
+      accountLink.href = "/public/html files/profile.html";
     }
     if (account_content) account_content.classList.remove("hidden");
     if (account_mobile) {
       account_mobile.innerHTML = `<img src='${userData.Photo}' height='50px' width='50px' style='border:1px solid white; border-radius:50%;padding:5px'>`;
-      account_mobile.href = "/e-commerce-1000/public/html files/profile.html";
+      account_mobile.href = "/public/html files/profile.html";
     }
     await updateCartCount();
   } else {
@@ -139,9 +139,9 @@ window.addEventListener("DOMContentLoaded",async () => {
     if (wishlistCount) wishlistCount.textContent = gust.length;
     if (accountLink) {
       accountLink.textContent = "Account";
-      accountLink.href = "/e-commerce-1000/public/html files/login.html";
+      accountLink.href = "../html files/login.html";
     }
-    if (account_mobile) account_mobile.href = "/e-commerce-1000/public/html files/login.html";
+    if (account_mobile) account_mobile.href = "../html files/login.html";
     if (account_content) account_content.classList.add("hidden");
     await updateCartCount();
   }
@@ -256,7 +256,7 @@ const handleAuthRedirect = () => {
         handleAuthRedirect();
         return;
       }
-      window.location.href = "/e-commerce-1000/public/html files/profile.html";
+      window.location.href = "../html files/profile.html";
     });
   }
 });
@@ -346,7 +346,7 @@ onAuthStateChanged(auth, async (user) => {
   
   try {
     const snap = await getDoc(doc(db, "users", user.uid));
-    if (snap.exists() && snap.data().role === "admin") {
+    if (snap.exists() && snap.data().role === "admin\n") {
       adminLink.classList.remove("hidden"); ///////////////////////////////////////
     } else {
       adminLink.classList.add("hidden");

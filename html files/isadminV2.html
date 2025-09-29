@@ -11,16 +11,58 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-papX..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script
       src="https://kit.fontawesome.com/a2e0e6ad65.js"
       crossorigin="anonymous"
     ></script>
-
-   
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>    <script>
+   (function(){
+      emailjs.init("EHqmYmFjqo3BpOP5g"); // Public Key EmailJS Dashboard
+   })();
+</script>
+    <!-- <script type="module">
   
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+  import { getFirestore, getDoc, doc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "YOUR_KEY",
+    authDomain: "YOUR_DOMAIN",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_BUCKET",
+    messagingSenderId: "YOUR_SENDER",
+    appId: "YOUR_APP_ID",
+  };
+
+  // Init
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  // Auth check
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      // Not logged in
+      window.location.href = "../html files/login.html";
+      return;
+    }
+
+    try {
+      const snap = await getDoc(doc(db, "users", user.uid));
+      if (!snap.exists() || snap.data().role !== "admin") {
+        alert("Access denied. Admins only.");
+        window.location.href = "../index.html";
+      }
+    } catch (err) {
+      console.error("Auth check error:", err);
+      window.location.href = "../index.html";
+    }
+  });
+    </script> -->
   </head>
 
   <body class="bg-gray-100 text-gray-900 font-sans">
@@ -227,7 +269,7 @@
             <div class=" flex gap-4">
               <select id="orderFilter" class="border rounded p-2">
                 <option value="all">All Orders</option>
-                <option value="pending">Pending</option>
+                <option value="completed">Completed</option>
                 <option value="shipped">Shipped</option>
                 <option value="canceled">Canceled</option>
               </select>
@@ -253,12 +295,10 @@
     </section>
 
     <!-- admin.js (module) -->
-         <!-- small inline fallback for sidebar toggle in case admin.js didn't load -->
-     <script type="module" src="../scripts file/firebase_connection.js"></script>
     <script type="module" src="../scripts file/adminV2.js"></script>
     <!-- <script type="module" src="../scripts/updateProdacts.js"></script> -->
 
-
+    <!-- small inline fallback for sidebar toggle in case admin.js didn't load -->
     <script>
       (function () {
         const sidebar = document.getElementById("sidebar");
